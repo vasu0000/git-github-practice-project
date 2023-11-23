@@ -1,0 +1,120 @@
+Define AppDynamics
+List out different types of Agents in Appdynamics
+Differentiate Grid Layout
+What are app agents in AppDynamics?:
+What is a flow map in AppDynamics?:
+What are Tiers in AppDynamics?:
+What type of tool is AppDynamics?:
+Which technology is adopted by the AppDynamics tool?:
+In Appdynamics, what are the specific metrics you look at for Java / Dotnet to be monitored during any testing of applications?:
+What did your day-to-day look like in your most previous role?:
+How often did you interact with customers, engineering or other stakeholders?:
+What is the difference between tier and node in AppDynamics?
+Number of Regions N Lines Divide Plane
+Greedy Problem
+
+
+jd
+
+FHDPX-JNVDW-FF3RD-HPDKC-MP2TB
+
+
+WITH cte AS (SELECT EMP_NAME,SECTION,CONTACT_INFO,LOCATION, ROW_NUMBER() OVER (PARTITION BY EMP_NAME,SECTION,CONTACT_INFO,LOCATION ORDER BY EMP_NAME,SECTION,CONTACT_INFO,LOCATION )
+ rownum FROM INFORMATION )
+select * from cte WHERE rownum>1;
+
+
+Experience in modifying and running scripts used for loading and extracting data into a database
+Experience in SQL Queries, Joins, DDL, DML, TCL, Types, Object, Collection Development
+Develop, implement and optimize stored procedures and functions using T-SQL Experience in troubleshooting and resolving database problems
+Maintain documentation and standards of Database architecture. Experience SQL Server database & cloud technologies like AWS and also analyze existing SQL queries for performance improvements
+experience with Linux environments,including extensive shell scripting  
+
+
+Senior Reliability Engineer - Contractor
+
+Arcesium is a post-trade technology and professional services firm that solves complex post-trade challenges of asset managers.
+
+We are looking for an intelligent and resourceful candidate for our SRE (Site Reliability Engineering) team based in Hyderabad / Bengaluru (Bangalore) / Delhi. The team is responsible for monitoring the stability and availability of mission critical production systems, managing incidents for quicker resolution, and establishing BAU.
+
+ 
+
+What you will do:
+
+Production support for operational excellence
+
+·        Provide world-class customer focused support and serve as a primary contact for clients seeking technical advice or experiencing service interruptions on a 24x7 rotational basis.
+
+·        Monitor, prioritize, assign and resolve alerts and support tickets based on priority and SLOs
+
+·        Regularly review work done and drive initiatives for improving efficiency and reducing toil
+
+·        Maintain high quality documentation and alert KBs
+
+ 
+
+Incident command and control
+
+·        Command and control incidents by engaging right stake holders and resolving incidents ASAP
+
+·        Drive elevated level of engagement during all stages of incident and publishing regular status
+
+·        Clearly document the troubleshooting steps taken during Incidents in chronological order.
+
+·        Review RCA (Root Cause Analysis), conduct incident post-mortem meetings and drive action items to improve stability and reliability
+
+·        Identify opportunities and take ownership for continuous improvement of Incident Management process and best practices.
+
+ 
+
+What you will need:
+
+4 to 8 years of experience handling mission critical applications in a 24 X 7 production environment.
+
+ 
+
+Production support for operational Excellence
+
+·        3+ years of experience managing applications in Kubernetes environments with AWS
+
+·        3+ years of experience in UNIX/Linux administration and troubleshooting skills
+
+·        3+ years of experience with monitoring and logging tools (e.g. DataDog, ELK, Prometheus, Grafana).
+
+·        3+ years of experience in DevOps & SRE processes.
+
+ 
+
+Incident Command and Control
+
+·        Ability to stay focused, ask right questions and align efforts of all participants for quick resolution of incidents
+
+·        Must demonstrate the ability to lead senior tech audience in an incident, regardless of their organizational role.
+
+·        Ability to sense and manage emotions, driving action needed to resolve the incident
+
+·        Strong analytical and problem-solving skills, with a proven record of incident command and control
+
+ 
+
+General
+
+·        Excellent verbal and written communication skills
+
+·        Excellent collaboration skills and interpersonal skills
+
+·        Strong bias for action and sense of urgency to resolve issues
+
+·        Strong process discipline and time management
+
+·        Ability to work unsupervised, independently and within a global team.
+
+·        Ability to manage multiple tasks in a fast-paced, ever-changing environment.
+
+ 
+
+
+Regards,
+Chaand
+Team Lead
+Mobile: +91-953896068 / 8971257441

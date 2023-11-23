@@ -1,0 +1,263 @@
+linux
+---------------------------
+
+
+1) How many types of linux file permissions are there? please provide the number that denotes the permissions as well?
+
+         Read(4): Users open and read files with this permission.
+         Write(2): Users can open and modify the files.
+         Execute(1): Users can run the file.
+
+       rwx - 421, given to user, group and others
+
+    using command   $chmod u=rwx,g=rwx,O=r myfile.txt  and   $chmod 777 myfile.txt
+
+     to change owner ::  $sudo chown myuser myfile.txt
+
+
+
+2) what are hard links and soft links in Linux?Would you be able to access the file if you delete a softlink?
+
+ 
+> Hard link: hard link is the  copyof a file content for which we create hardlink.
+
+             if we delete the original file still you will have the content in hard link
+             
+             we can create hard links with in a directories.
+           
+             (hard links and original file will have same i node values so the hard link represent the same original file location.
+              
+             hard link also one type of pointer to a file.)
+
+ > softlink: soft link is shortcut to file or directory. 
+
+            Soft Link contains the path of original file and not the content. 
+
+            if we delete the original file then softlink become inactive .
+  
+            (inode values of softlink and original files are different.
+
+
+>  creating hard link :  ln <filename/path> <hardlinkname>
+>  creating soft link :  ln -s <filename/path> <softlinkname>
+> to see link         : ln -li
+
+
+4) Which user in Linux has super user permissions by default?
+
+Root user has SUDO permission by deafult
+
+5) what are zombie or defunct process or dead processes? what system resource(s) they use?
+
+A process that has completed its execution but still has an entry in the process table. 
+
+      (which is waiting for it's parent to read the status code.Until the parent process reads the status code of the child process,
+          the PID of the child process will be in process table.)
+
+> to find jombie process : $top, $htop------- it shows status or S :: in output:
+ 
+  
+             D = uninterruptible sleep , I = idle, R = running, S = sleeping, T = stopped by job control signal, 
+             t = stopped by debugger during trace, Z = zombie
+             
+> kill-9 <process_id> -- for zombie process ::(     it consumes memory   )
+> kill-9 <Parent process_id> -- for zombie process ::(   it consumes memory    )
+
+
+
+6) What are daemons?
+
+ > Daemons process also called as background process, these are the long running program of linux which executes in the baground,
+ they dont have terminal so exicute inthe baground
+
+ > these process starts when computer is bootsrapped and terminated only when system shutdowns.
+
+   > line printing deamons is a demon that can control the print spooling process.
+
+(Daemons are services that provide several functions that may not be available under the base operating system.
+ Its main task is to listen for service request and at the same time to act on these requests. 
+After the service is done, it is then disconnected and waits for further requests.)
+
+
+7) How do you terminate an ongoing process?
+
+-kill <process_id>
+-kill-9 <process_id> -- for jombie process
+
+          for pid :   $ps ,  $ps a , $top, $ htop, $sar, $$ - for cureent process id
+ 
+           Prints the PID :: $echo "$$"
+
+           Prints the PPID:: echo "${PPID}"
+
+   ps aux | grep {process-name-here} ;;;; nginex, mysqlid,,,etc. ex: $ps aux | grep -E 'nginx|mysql|apache'
+   
+   ps -aux | grep {process-to-find-here}
+
+
+9) what are the different commands to see CPU utilization inLinux system
+Any two of the following should be fine:
+
+-/cat/porc/cpuinfo
+-lscpu
+- top
+- htop
+- sar
+- iostat
+
+for memory :
+--/cat/porc/cpuinfo
+-- $ free
+--$vmstat (Virtual Memory Statistics)
+-- top
+-- htop
+
+
+8) what is the basic command to check the disk utilization
+-df -h
+-du -h
+-lsblk
+
+
+-----------------------------------------------------------------
+                                                                    AWS
+                                                     -----------------------------------------------------------
+
+1) what are the networking services offerings from AWS? (3-4 responses should be fine)
+
+AWS VPC(Virtual Private Cloud)
+AWS Virtual Private Network                     Amazon EC2     Load Balancers  Amazon Gateway  AWS PrivateLink    Amazon VPC Flow Logs   VPC Traffic Mirroring
+
+Elastic Load Balancing (ELB)
+
+Amazon Route 53
+
+Amazon CloudFront
+
+AWS Transit Gateway
+AWS PrivateLink
+
+AWS Direct Connect
+
+
+
+2. What is the relation between the Availability Zone and Region?
+
+  AWS Regions are separate geographic areas. 
+
+  AWS Regions consist of multiple Availability Zones they may be  physically separated and isolated  .
+
+  (that are connected with low latency, high throughput, highly redundant networking.)
+
+ex: like the US-West 1 (North California) and Asia South (Mumbai).
+
+ 
+
+3. what are the steps involved in changing the instance states (type )of an EC2 instance
+
+       You can change the state of an instance from the AWS management console  - (goto aws--search ec2-- see isntances)
+
+select the instance -->goto isntance action-- we can see start, stop, reboot,terminate. options
+
+
+     - start  :  Here, you can stop the running state.
+
+     - Stop  :  Here, you can stop the running state.
+
+      -Reboot : This is used to reboot an instance
+
+     -Terminate :- This state is used to terminate an instance permanently.
+
+
+4. What is the monitoring service that AWS offers?
+
+  1. monitoring service : Cloudwatch  :  (AWS) offers a monitoring service called Amazon CloudWatch. 
+
+    
+
+       CloudWatch can be used to monitor AWS resources and applications in real time. It can also be used to monitor KPIs from within AWS EC2 instances.
+
+         Collect and visualize metrics across services
+         Create customized dashboards
+         Set alarms that notify you or take actions when a specified metric reaches a threshold
+         Respond to performance changes
+         Optimize resource use
+         Provide insights into operational health    
+
+ 2.monitoring tools :
+     Nagios XI
+     Dynatrace
+     EG Innovations' monitoring service
+
+
+
+5. Can we access S3 bucket which was created in one region from another?
+
+- Yes, S3 is a global resource. An S3 bucket once created in a particular region, can be accessed from different regions but the latency will be different.
+  
+  latency : delay in comminication or data transfer.
+
+
+
+6. How do you access AWS VPC logs?
+
+aws VPC Flow Logs is a feature that enables you to capture information about the IP traffic going to and from network interfaces in your VPC
+
+- Cloundwatch and cloudwatch logs
+
+- VPC flow logs
+
+
+(goto aws console -- search vpc service -- goto vpc dashbord -- select the instance -- goto flow logs.
+
+ to access aws vpc logs -- first Setup VPC Flow Logs swtup to save   in s3 buket  or  To CloudWatch Log Group. 
+
+from s3 buket we can acces logs )
+
+
+
+
+
+-------------------------------------k8s --------------------
+
+    kubernetes
+                                                  ---------------------
+
+1. What is a deployment vs pod?
+
+   > Deployment :  A deployment is an management tool in Kubernetes that lets us  to manage a set of identical pods
+     
+        / Ensures that pods have the correct configuration and that the right number of them exist
+  
+  
+ > Pod :         A pod is the smallest deployment unit in Kubernetes  / house one or more containers . 
+   
+            A pod is the smallest deployment unit in Kubernetes that  -  usually represents one instance/ applications of the containerized application
+
+
+2. How can you ensure a deployment runs 5 pods?
+
+   > Deployment is created by using YAML file , there we need togive repilca value as  5
+
+     > to do changes in yamel file  --use : vim particular yaml file  ---- vim deploy.yaml(its a file)
+
+     > to create or edit previous pod :: kubectl apply -f pod.yaml   (or)  kubectl create -f pod.yaml
+     
+     > can create service, deployment,pods etc..
+
+note :REPICA or  Replication is the process of making multiple copies of data and 
+
+        storing them at different locations for backup purposes, 
+
+        fault tolerance, and to improve their overall accessibility across a network. 
+
+
+
+3.  what is the Command to list pods in a k8s cluster
+
+   > kubectl get pods
+
+   > kubectl get pods - O wide   gives more details
+
+   > kubectl delete podname   ;; we get podname from kubectl get pods
+

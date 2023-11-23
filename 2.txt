@@ -1,0 +1,503 @@
+                                                                               Linux
+                                                                         ---------------
+
+1) How many types of linux file permissions are there? please provide the number that denotes the permissions as well?
+
+         Read(4): Users open and read files with this permission.
+         Write(2): Users can open and modify the files.
+         Execute(1): Users can run the file.
+
+       rwx - 421, given to user, group and others
+
+    using command   $chmod u=rwx,g=rwx,O=r myfile.txt  and   $chmod 777 myfile.txt
+
+     to change owner ::  $sudo chown myuser myfile.txt
+
+
+
+2) what are hard links and soft links in Linux?Would you be able to access the file if you delete a softlink?
+
+ 
+> Hard link: hard link is the  copyof a file content for which we create hardlink.
+
+             if we delete the original file still you will have the content in hard link
+             
+             we can create hard links with in a directories.
+           
+             (hard links and original file will have same i node values so the hard link represent the same original file location.
+              
+             hard link also one type of pointer to a file.)
+
+ > softlink: soft link is shortcut to file or directory. 
+
+            Soft Link contains the path of original file and not the content. 
+
+            if we delete the original file then softlink become inactive .
+  
+            (inode values of softlink and original files are different.
+
+
+>  creating hard link :  ln <filename/path> <hardlinkname>
+>  creating soft link :  ln -s <filename/path> <softlinkname>
+> to see link         : ln -li
+
+
+3) what is i node ? 
+
+Inode is a data structure that stores all the information about a file. 
+
+   Like  size of the file,
+         userid of the file,
+         group id of the file, 
+         timestamps for file creation, 
+     modification..etc. 
+
+  (Inode numbers uniquely exist for all the files on Linux.)
+
+to find inode : $ ls -i 
+
+
+4) Which user in Linux has super user permissions by default?
+
+Root user has SUDO permission by deafult
+
+
+
+5) what are zombie or defunct process or dead processes? what system resource(s) they use?
+
+A process that has completed its execution but still has an entry in the process table. 
+
+      (which is waiting for it's parent to read the status code.Until the parent process reads the status code of the child process,
+          the PID of the child process will be in process table.)
+
+> to find jombie process : $top, $htop------- it shows status or S :: in output:
+ 
+  
+             D = uninterruptible sleep , I = idle, R = running, S = sleeping, T = stopped by job control signal, 
+             t = stopped by debugger during trace, Z = zombie
+             
+> kill-9 <process_id> -- for zombie process ::(     it consumes memory   )
+> kill-9 <Parent process_id> -- for zombie process ::(   it consumes memory    )
+
+
+
+6) What are daemons?
+
+ > Daemons process also called as background process, these are the long running program of linux which executes in the baground,
+ they dont have terminal so exicute inthe baground
+
+ > these process starts when computer is bootsrapped and terminated only when system shutdowns.
+
+   > line printing deamons is a demon that can control the print spooling process.
+
+(Daemons are services that provide several functions that may not be available under the base operating system.
+ Its main task is to listen for service request and at the same time to act on these requests. 
+After the service is done, it is then disconnected and waits for further requests.)
+
+
+7) How do you terminate an ongoing process?
+
+-kill <process_id>
+-kill-9 <process_id> -- for jombie process
+
+          for pid :   $ps ,  $ps a , $top, $ htop, $sar, $$ - for cureent process id
+ 
+           Prints the PID :: $echo "$$"
+
+           Prints the PPID:: echo "${PPID}"
+
+   ps aux | grep {process-name-here} ;;;; nginex, mysqlid,,,etc. ex: $ps aux | grep -E 'nginx|mysql|apache'
+   
+   ps -aux | grep {process-to-find-here}
+
+
+9) what are the different commands to see CPU utilization inLinux system
+Any two of the following should be fine:
+
+-/cat/porc/cpuinfo
+-lscpu
+- top
+- htop
+- sar
+- iostat
+
+for memory :
+--/cat/porc/cpuinfo
+-- $ free
+--$vmstat (Virtual Memory Statistics)
+-- top
+-- htop
+
+
+8) what is the basic command to check the disk utilization
+-df -h
+-du -h
+-lsblk
+
+
+                                                                                  AWS
+                                                     -----------------------------------------------------------
+
+1) what are the networking services offerings from AWS? (3-4 responses should be fine)
+
+AWS VPC(Virtual Private Cloud)
+AWS Virtual Private Network                     Amazon EC2     Load Balancers  Amazon Gateway  AWS PrivateLink    Amazon VPC Flow Logs   VPC Traffic Mirroring
+
+Elastic Load Balancing (ELB)
+
+Amazon Route 53
+
+Amazon CloudFront
+
+AWS Transit Gateway
+AWS PrivateLink
+
+AWS Direct Connect
+
+
+
+2. What is the relation between the Availability Zone and Region?
+
+  AWS Regions are separate geographic areas. 
+
+  AWS Regions consist of multiple Availability Zones they may be  physically separated and isolated  .
+
+  (that are connected with low latency, high throughput, highly redundant networking.)
+
+ex: like the US-West 1 (North California) and Asia South (Mumbai).
+
+ 
+
+3. what are the steps involved in changing the instance states (type )of an EC2 instance
+
+       You can change the state of an instance from the AWS management console  - (goto aws--search ec2-- see isntances)
+
+select the instance -->goto isntance action-- we can see start, stop, reboot,terminate. options
+
+
+     - start  :  Here, you can stop the running state.
+
+     - Stop  :  Here, you can stop the running state.
+
+      -Reboot : This is used to reboot an instance
+
+     -Terminate :- This state is used to terminate an instance permanently.
+
+
+
+ 4. what are the steps involved in changing the instance type or size of an EC2 instance ?
+
+
+You can change the state of an instance from the AWS management console  -->>search ec2 serivice-->- see the instance and rightclic on it
+ 
+--> we can create/lanuch instance , or use old instance -->must be a running isntance or start it 
+
+--> actions on rhs top--> goto instance settings--> change the instance setttings(its avilable only when we stop running instance.
+
+ select types :: t2.medium, t2,micro .. etc. save and apply. run it . run available on istance state button  on rhs top. 
+
+
+
+5) how to connect to ec2 instance ? 
+
+   3 ways to connect : 
+            got to isntace select --> click on launchinstance connection method : 1. a standardalone ssh clint ,
+                                                                                   2. session manager 
+                                                                                   3. ec2 instant connect ( browser baes ssh connection)  
+
+
+
+
+4. What is the monitoring service that AWS offers?
+
+  1. monitoring service : Cloudwatch  :  (AWS) offers a monitoring service called Amazon CloudWatch. 
+
+    
+
+       CloudWatch can be used to monitor AWS resources and applications in real time. It can also be used to monitor KPIs from within AWS EC2 instances.
+
+         Collect and visualize metrics across services
+         Create customized dashboards
+         Set alarms that notify you or take actions when a specified metric reaches a threshold
+         Respond to performance changes
+         Optimize resource use
+         Provide insights into operational health    
+
+ 2.monitoring tools :
+     Nagios XI
+     Dynatrace
+     EG Innovations' monitoring service
+
+
+
+5. Can we access S3 bucket which was created in one region from another?
+
+- Yes, S3 is a global resource. An S3 bucket once created in a particular region, can be accessed from different regions but the latency will be different.
+  
+  latency : delay in comminication or data transfer.
+
+
+
+6. How do you access AWS VPC logs?
+
+aws VPC Flow Logs is a feature that enables you to capture information about the IP traffic going to and from network interfaces in your VPC
+
+- Cloundwatch and cloudwatch logs
+
+- VPC flow logs
+
+
+(goto aws console -- search vpc service -- goto vpc dashbord -- select the instance -- goto flow logs.
+
+ to access aws vpc logs -- first Setup VPC Flow Logs swtup to save   in s3 buket  or  To CloudWatch Log Group. 
+
+from s3 buket we can acces logs )
+
+
+
+
+
+What are AWS VPC logs?
+
+VPC Flow Logs is a feature that enables you to capture information about the IP traffic going to and from network interfaces in your VPC. 
+
+Flow log data can be published to Amazon CloudWatch Logs and Amazon S3. After you've created a flow log, you can retrieve and view its data in the chosen destination.
+
+
+
+7) What is an Amazon EC2 instance?
+
+  Amazon EC2 instance refers to a virtual server in Amazon’s Elastic compute cloud (EC2) that allows for the running of applications on the AWS infrastructure. 
+
+  Amazon offers multiple instances with various CPU and memory configurations to meet the user's demand. 
+   
+  Every AWS EC2 type instance is of different sizes to adjust to certain workload demands. 
+
+
+
+8) What is EBS used for in AWS?
+
+  Amazon EBS allows you to create storage volumes and attach them to Amazon EC2 instances. 
+
+  Once attached, you can create a file system on top of these volumes, run a database, or use them in any other way you would use block storage.
+
+
+
+9) What are the 3 types of storage in AWS?
+
+  There are three main cloud storage types:  object storage(s3),   file storage, and block storage(EBS).
+
+  Each offers its own advantages and has its own use cases.
+
+
+10) what is s3 ?
+
+Amazon Simple Storage Service (Amazon S3) is a web-based cloud storage service offered by Amazon Web Services (AWS)
+It offers object-based storage, where data is stored inside S3 buckets in distinct units called objects instead of files. 
+Individual Amazon S3 objects can range in size from a minimum of 0 bytes to a maximum of 5 terabytes.
+
+
+
+note :  Elastic File System (EFS): Can be accessed via several EC2 machines and AWS Services
+      
+        Elastic Block Storage (EBS): Can only be accessed via an EC2 machine
+
+
+
+full forms : 
+
+EBS : elastic block storage
+IAM:  Identity and Access Management (IAM)
+AMI : Amazon Machine Image (AMI) 
+(EC2): Elastic compute cloud (EC2)
+(EFS) :Elastic File System (EFS)
+VPC ( Virtual Private Cloud) 
+
+(EKS) : Elastic Kubernetes Service 
+                                                 
+
+                                                     kubernetes
+                                                  ---------------------
+
+1. What is a deployment vs pod?
+
+   > Deployment :  A deployment is an management tool in Kubernetes that lets us  to manage a set of identical pods
+     
+        / Ensures that pods have the correct configuration and that the right number of them exist
+  
+  
+ > Pod :         A pod is the smallest deployment unit in Kubernetes  / house one or more containers . 
+   
+            A pod is the smallest deployment unit in Kubernetes that  -  usually represents one instance/ applications of the containerized application
+
+
+2. How can you ensure a deployment runs 5 pods?
+
+   > Deployment is created by using YAML file , there we need togive repilca value as  5
+
+     > to do changes in yamel file  --use : vim particular yaml file  ---- vim deploy.yaml(its a file)
+
+     > to create or edit previous pod :: kubectl apply -f pod.yaml   (or)  kubectl create -f pod.yaml
+     
+     > can create service, deployment,pods etc..
+
+note :REPICA or  Replication is the process of making multiple copies of data and 
+
+        storing them at different locations for backup purposes, 
+
+        fault tolerance, and to improve their overall accessibility across a network. 
+
+
+
+3.  what is the Command to list pods in a k8s cluster
+
+   > kubectl get pods
+
+   > kubectl get pods - O wide   gives more details
+
+   > kubectl delete podname   ;; we get podname from kubectl get pods
+
+
+
+4. what are the ways to connect k8s to aws ?
+
+There are two main ways to use Kubernetes on AWS:
+
+ run it yourself on Amazon EC2 virtual machine instances, or 
+
+use the Amazon EKS service. 
+
+
+
+                                                                yaml
+
+                                                           ------------------
+
+1) what is YAML ? (serialization language not programming language)
+
+>  yaml  stands for "Yet Another Markup Language. or YAML ain't markup language.
+
+> YAML is a common programing language as a result of it’s human-readable and simple to grasp. 
+
+> It can even be used injunction with different programming languages.
+
+
+2) IS YAML and JSON are same or different?
+
+To configure environment details, YAML and JSOn are both used as data format serialization languages. 
+YAML is a superset of JSOn with more advanced features.
+
+Both support popular languages such as java, python, and nodejs.
+
+YAML files are more readable than JSON, However processing JSON files are faster compared with YAML files.
+
+JSON content in the yaml file is valid whereas valid yaml is not included in the JSON file.
+
+                                             
+
+                                                   python
+                                            ---------------------------
+
+
+1) What is Python?
+
+ > Python is one of the commonly-used ,popular programming language.
+
+ > Python is used in several domains like System Scripting
+   - Web Development
+   - Game Development
+   - Software Development
+   - Complex Mathematics
+
+
+2) What are the benefits of using Python language as a tool in the present scenario?
+
+The following are the benefits of using Python language:
+
+- Object-Oriented Language
+- High-Level Language
+- Dynamically Typed language
+- Extensive support Libraries
+- Presence of third-party modules
+- Open source and community development
+- Portable and Interactive
+- Portable across Operating systems
+
+
+3. Is Python a compiled language or an interpreted language?
+
+ Python is a partially compiled language and partially interpreted language.
+
+ The compilation part is done first when we execute our code and this will generate byte code internally this byte code gets
+
+ converted by the Python virtual machine(p.v.m) according to the underlying platform(machine+operating system).
+
+
+4. What does the ‘#’ symbol do in Python?
+
+‘#’ is used to comment on everything that comes after on the line.
+
+
+
+5). How do you debug a Python program?
+
+   > By using this command we can debug a Python program:
+
+   > $ python -m pdb python-script.py
+
+
+
+6). How to delete a file using Python?
+
+   We can delete a file using Python by following approaches:
+
+  - os.remove()
+
+  - os.unlink()
+
+7)  What is slicing in Python?
+
+  Python Slicing is a string operation for extracting a part of the string, or some part of a list. 
+
+  With this operator, one can specify where to start the slicing, where to end, and specify the step. 
+
+  List slicing returns a new list from the existing list.
+
+    Syntax: Lst[ Initial : End : IndexJump ]
+
+
+8). What is a namespace in Python?
+
+A namespace is a naming system used to make sure that names are unique to avoid naming conflicts.
+
+36. Define encapsulation in Python?
+Encapsulation means binding the code and the data together. A Python class is an example of encapsulation.
+
+
+
+37. How do you do data abstraction in Python?
+
+Data Abstraction is providing only the required details and hides the implementation from the world. 
+It can be achieved in Python by using interfaces and abstract classes.
+
+
+35. What is Polymorphism in Python?
+
+Polymorphism means the ability to take multiple forms. So, for instance, if the parent class has a method named
+ ABC then the child class also can have a method with the same name ABC having its own parameters and variables. 
+Python allows polymorphism.
+
+
+32. What are Iterators in Python?
+In Python, iterators are used to iterate a group of elements, containers like a list. Iterators are collections of items, and they can be a list, tuples, or a dictionary. Python iterator implements __itr__ and the next() method to iterate the stored elements. We generally use loops to iterate over the collections (list, tuple) in Python.
+
+
+33. What are Generators in Python?
+In Python, the generator is a way that specifies how to implement iterators. It is a normal function except that it yields expression in the function. It does not implement __itr__ and next() method and reduces other overheads as well.
+
+If a function contains at least a yield statement, it becomes a generator. The yield keyword pauses the current execution by saving its states and then resumes from the same when required.
+
+
+34. Does Python supports multiple Inheritance?
+Python does support multiple inheritances, unlike Java. Multiple inheritances mean that a class can be derived from more than one parent class.
+
